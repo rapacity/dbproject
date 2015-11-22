@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script id="loading" type="x-tmpl-mustache">
+  <div class="ui icon message">
+    <i class="notched circle loading icon"></i>
+    <div class="content">
+      <div class="header">
+        Just one second
+      </div>
+      <p>We're fetching that content for you.</p>
+    </div>
+  </div>
+</script>
+
+<script id="error" type="x-tmpl-mustache">
+  <div class="ui error message">
+    <i class="close icon"></i>
+    <div class="header">
+      {{title}}
+    </div>
+    <ul class="list">
+      {{#errors}}
+      <li>{{.}}</li>
+      {{/errors}}
+    </ul>
+  </div>
+</script>
+
+<script id="photo" type="x-tmpl-mustache">
+  <div class="ui card" style="height: 300px; width: 300px;">
+    <a class="image" href="#">
+     <img src="{{location}}">
+    </a>
+    <div class="content">
+      <a class="header" href="#">{{caption}}</a>
+      <div class="meta">
+        <a>{{timestamp}}</a>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="login" type="x-tmpl-mustache">
+<div class="ui middle aligned center aligned grid fullscreen">
+  <div class="small column">
+    <h2 class="ui black image header">
+      <img src="images/key.png" class="image">
+      <div class="content">
+        Log-in to your account
+      </div>
+    </h2>
+    <form class="ui large form">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="email" placeholder="E-mail address">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Password">
+          </div>
+        </div>
+        <div class="ui fluid large submit button">Log-in</div>
+      </div>
+      <div class="ui error message"></div>
+    </form>
+    <div class="ui message">
+      New to us? <a href="#register">Register now</a>
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="register" type="x-tmpl-mustache">
+<div class="ui middle aligned center aligned grid fullscreen">
+  <div class="medium column">
+    <h2 class="ui black image header">
+      <img src="images/entry-door.png" class="image">
+      <div class="content">
+        Register
+      </div>
+    </h2>
+    <form class="ui large form">
+      <div class="ui left aligned stacked segment">
+        <h4 class="ui centered dividing header">Personal Information</h4>
+        <div class="field">
+          <div class="two fields">
+            <div class="field">
+              <label>First Name</label>
+              <input type="text" name="firstname" placeholder="First Name">
+            </div>
+            <div class="field">
+              <label>Last Name</label>
+              <input type="text" name="lastname" placeholder="Last Name">
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label>Birthday</label>
+          <input type="text" name="birthday" placeholder="MM/DD/YYYY">
+        </div>
+        <div class="field">
+          <select class="ui fluid search dropdown" name="gender">
+            <option value="" disabled selected>Gender</option>
+            <option value="M">M</option>
+            <option value="F">F</option>
+            <option value="N">N/A</option>
+          </select>
+        </div>
+        <div class="field">
+          <div class="fields">
+            <div class="sixteen wide field">
+              <input type="text" name="hometown" placeholder="Hometown">
+            </div>
+          </div>
+        </div>
+
+        <h4 class="ui dividing header">Account Information</h4>
+        <div class="field">
+          <div class="ui left input">
+            <input type="text" name="email" placeholder="E-mail address">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left input">
+            <input type="password" name="password" placeholder="Password">
+          </div>
+        </div>
+        <div class="ui fluid large submit button">Submit</div>
+      </div>
+    </form>
+  </div>
+</div>
+</script>
+
+
+<script id="register-success" type="x-tmpl-mustache">
+<div class="ui middle aligned center aligned grid fullscreen">
+  <div class="medium column">
+    <h2 class="ui black image header">
+      <img src="images/entry-door.png" class="image">
+      <div class="content">
+        Register
+      </div>
+    </h2>
+    <div class="ui left aligned stacked segment">
+      <h2 class="ui green header">
+        <i class="green massive check circle icon"></i>
+        <div class="content">
+          You may now log-in with your new account
+        </div>
+      </h2>
+      <a class="ui fluid large submit button" href="#login">Log-in</a>
+    </div>
+  </div>
+</div>
+</script>
+
+
+<script id="logout" type="x-tmpl-mustache">
+<div class="ui middle aligned center aligned grid fullscreen">
+  <div class="medium column">
+    <h2 class="ui black image header">
+      <img src="images/exit-door.png" class="image">
+      <div class="content">
+        Goodbye
+      </div>
+    </h2>
+    <div class="ui left aligned stacked segment">
+      <h2 class="ui header">
+        <i class="massive users icon"></i>
+        <div class="content">
+          You are now logged out of your account
+          <div class="sub header">
+            Visit us again soon!
+          </div>
+        </div>
+      </h2>
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="404" type="x-tmp-mustache">
+ <div class="ui middle aligned center aligned grid fullscreen">
+  <div class="medium column">
+    <div class="ui left aligned stacked segment">
+      <h2 class="ui red header">
+        <i class="red massive remove circle icon"></i>
+        <div class="content">
+          The page you are looking for can't be found
+        </div>
+      </h2>
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="photos" type="x-tmpl-mustache">
+  <div class="ui segment">
+    <h3 class="ui header">Gallery</h3>
+    <div class="gallery">
+      {{#images}}
+        <div class="ui card" style="height: 300px; width: 300px;">
+          <a class="image" href="#">
+            <img src="{{location}}">
+          </a>
+          <div class="content">
+            <a class="header" href="#">{{caption}}</a>
+            <div class="meta">
+              <a>{{timestamp}}</a>
+            </div>
+          </div>
+        </div>
+      {{#/images}}
+    </div>
+  </div>
+</script>
+
+<script id="navbar-registered" type="x-tmpl-mustache">
+  <a id="sidebar-toggle" class="item">
+    <i class="sidebar icon"></i>
+  </a>
+  <a class="header item" onclick='route(""); return false;'>
+    Photoshare
+  </a>
+  <a class="item" onclick='route("members"); return false;'>
+    Members
+  </a>
+  <a class="item" onclick='route("photos"); return false;'>
+    Photos
+  </a>
+  <div class="right menu">
+    <a class="item" href="#logout">Log-out</a>
+    <a class="item" style="padding-top: 0px !important; padding-bottom: 0px !important; margin: 0px !important;">
+      <img style="height:32px; padding:0px !important; margin-right: 10px !important;" class="ui circular image"
+          src="/avatars/{{account.user_avatar}}">
+        {{account.user_name}}
+    </a>
+  </div>
+</script>
+
+<script id="navbar" type="x-tmpl-mustache">
+  <a id="sidebar-toggle" class="item">
+    <i class="sidebar icon"></i>
+  </a>
+  <a class="header item" onclick='route(""); return false;'>
+    Photoshare
+  </a>
+  <a class="item" onclick='route("members"); return false;'>
+    Members
+  </a>
+  <a class="item" onclick='route("photos"); return false;'>
+    Photos
+  </a>
+  <div class="right menu">
+    <a class="item" href="#register">Register</a>
+    <a class="item" href="#login">Log-in</a>
+  </div>
+</script>
+
+<script id="frontpage" type="x-tmpl-mustache">
+  <div class="ui inverted vertical masthead center aligned segment  full height image">
+    <div class="ui center aligned text container">
+      <h1 class="ui inverted header">
+        PhotoShare
+      </h1>
+      <h2>Quality photo sharing</h2>
+    </div>
+    <div class="ui center aligned  attached borderless" style="padding-top: 5em;">
+      <div class="ui massive icon input">
+        <input id="frontpage-search-photos-bar" placeholder="Search for photos ..." type="text" size="30">
+        <i class="search icon"></i>
+      </div>
+    </div>
+  </div>
+  <div class="ui center aligned main text container">
+    <div class="ui equal width grid centered padded">
+      <div class="row">
+        <div class="column">
+          <div class="ui segment">
+            <h3 class="ui dividing header">Currently trending tags</h3>
+            <div class="ui divided items">
+              {{#tags}}
+              <div class="item">
+                <a class="ui tiny image" href='#photo/{{photo_id}}'><img class="ui tiny image" src="/thumbs/{{photo_code}}"></a>
+                <div class="middle aligned content">
+                  <div class="header"><a onclick='place_filter_tag("{{tag_name}}"); return false;'>{{tag_name}}</a></div>
+                  <div class="meta">{{tag_count}} Photos</div>
+                </div>
+              </div>
+              {{/tags}}
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <h3 class="ui dividing header">Meet our top 10 contributors</h3>
+            <div class="ui ordered vertical list">
+              {{#users}}
+              <div class="item">
+                <img class="ui avatar image" src="/avatars/{{user_avatar}}">
+                <div class="content">
+                  <div class="header"><a href="#user/{{user_id}}">{{user_name}}</a></div>
+                  {{user_activity}} Activity Points
+                </div>
+              </div>
+              {{/users}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="search-users-bar" type="x-tmpl-mustache">
+  <div class="ui center aligned segment attached borderless">
+    <div class="ui massive icon input">
+      <input name="search-users-bar" placeholder="Search for users ..." type="text" size="30">
+      <i class="search icon"></i>
+    </div>
+  </div>
+</script>
+
+<script id="search-users-results" type="x-tmpl-mustache">
+  <div id="search-users-results" class="ui middle aligned center aligned grid segment attached">
+    <div class="row">
+      <div class="medium column">
+        <table class="ui table">
+          <tbody>
+            {{#users}}
+            <tr>
+              <td>
+                {{user_gender}}
+              </td>
+              <td>
+                <h4 class="ui image header">
+                  <img src="/avatars/{{user_avatar}}" class="ui mini rounded image">
+                  <div class="content">
+                    <a href="#user/{{user_id}}">{{user_name}}</a>
+                    <div class="sub header">
+                      {{user_hometown}}
+                  </div>
+                </div>
+              </h4></td>
+              <td class="right aligned registered">
+                <button class="ui basic button" onclick='add_friend_request({{user_id}})'>
+                  <i class="icon add user"></i>
+                  Add Friend
+                </button>
+              </td>
+            </tr>
+            {{/users}}
+          </tbody>
+        </table>
+      </div>  
+    </div>
+  </div>
+</script>
+
+<script id="list-friend" type="x-tmpl-mustache">
+  <div class="ui middle aligned center aligned grid segment attached">
+    <div class="medium column">
+      <table class="ui table">
+        <tbody>
+          {{#users}}
+          <tr>
+            <td>
+              {{user_gender}}
+            </td>
+            <td>
+              <h4 class="ui image header">
+                <img src="/avatars/{{user_avatar}}" class="ui mini rounded image">
+                <div class="content">
+                  <a href="#user/{{user_id}}">{{user_name}}</a>
+                  <div class="sub header">
+                    {{user_hometown}}
+                </div>
+              </div>
+            </h4></td>
+          </tr>
+          {{/users}}
+        </tbody>
+      </table>
+    </div>  
+  </div>
+</script>
+
+<script id="search-photos-bar" type="x-tmpl-mustache">
+  <div class="ui center aligned segment attached borderless">
+    <div class="ui massive icon input">
+      <input name="search-photos-bar" placeholder="Search for photos ..." type="text" size="30">
+      <i class="search icon"></i>
+    </div>
+  </div>
+</script>
+
+<script id="view-photo" type="x-tmpl-mustache">
+<div class="ui middle aligned center aligned grid photo-screen">
+  <div class="column">
+    <img src="/uploads/{{photo.photo_code}}">
+  </div>  
+</div>
+
+<div class="ui main container" style="margin-top: 20px">
+  <div class="ui left floated text container">
+  </div>
+  <div class="ui equal width grid centered padded">
+    <div class="row">
+      <div class="column">
+        <div class="ui segment">
+          <h2 class="ui header">{{photo.photo_caption}}
+            <div class="sub header">
+              Posted in
+                <a href="#user/{{photo.user_id}}">{{photo.user_name}}</a>
+                <span class="divider"> / </span>
+                <a href="#album/{{photo.album_id}}">{{photo.album_name}}</a>, 
+                {{photo.photo_age}}
+            </div>
+          </h2>
+          <div class="ui left labeled button" tabindex="0">
+            <a class="ui basic right pointing label">
+              {{likes.length}}
+            </a>
+            <div class="ui button" onclick='make_like_request({{photo.photo_id}}); return false;'>
+              <i class="heart icon"></i> Like
+            </div>
+          </div>
+          <button class="negative right floated ui button owner" onclick='delete_photo({{photo.photo_id}}); route("albums"); return false;'>Delete Photo</button>
+        </div>
+        <div class="ui segment">
+          <div class="ui labels">
+            {{#tags}}
+            <div class="ui label">
+             <a onclick='place_filter_tag("{{tag_name}}"); return false;'>{{tag_name}}</a> <i onclick='untag_photo_request({{photo.photo_id}}, {{tag_id}}); return false;' class="icon close"></i>
+            </div>
+            {{/tags}}
+
+            {{#recommended_tags}}
+            <div class="ui pink label">
+             <a onclick='place_filter_tag("{{tag_name}}"); return false;'>{{tag_name}}</a><i style="cursor: pointer; padding-left: 8px; margin-right: -2px" class="icon add" onclick='tag_photo_request({photo_id: {{photo.photo_id}}, tag_name: "{{tag_name}}"}); return false;'></i>
+            </div>
+            {{/recommended_tags}}
+          </div>
+          {{#is_owner}}
+          <form class="ui tag form">
+            <input type="hidden" name="photo_id" value="{{photo.photo_id}}">
+            <div class="ui small fluid action input">
+              <input name="tag_name" placeholder="Type tag..." type="text">
+              <button class='ui blue labeled right small icon button'>
+                <i class="plus small icon"></i>
+                Tag
+              </button>
+            </div>
+          </form>
+          {{/is_owner}}
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui segment">
+          <div class="ui link items">
+            <div class="item">
+              <div class="ui tiny image">
+                <img src="/avatars/{{photo.user_avatar}}">
+              </div>
+              <div class="content">
+                <div class="header"><a href="#user/{{photo.user_id}}">{{photo.user_name}}</a></div>
+                <div class="meta">{{photo.user_hometown}}&nbsp;</div>
+                <button class="ui right floated button notowner registered" onclick="add_friend_request({{user_id}})">
+                  <i class="icon add user"></i>
+                  Add Friend
+                </button>
+                <div class="description">
+                </div>
+              </div>
+              <div class="ui top right attached label">Author</div>
+            </div>
+          </div>
+        </div>
+        <div class="ui segment">
+          <div class="ui middle aligned divided list">
+            {{#likes}}
+            <div class="item">
+              <img class="ui avatar image" src="/avatars/{{user_avatar}}">
+              <div class="content">
+                <a href="#user/{{user_id}}">{{user_name}}</a> likes this photo.
+              </div>
+            </div>
+            {{/likes}}
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="ui middle aligned center aligned grid screen">
+  <div class="ui segment">
+    <div class="ui comments">
+      <h3 class="ui dividing header">Comments</h3>
+      {{#comments}}
+      <div class="comment">
+        <a class="avatar">
+          <img src="/avatars/{{user_avatar}}">
+        </a>
+        <div class="content">
+          <a class="author">{{user_name}}</a>
+          <div class="metadata">
+            <div class="date">{{comment_age}}</div>
+          </div>
+          <div class="text">
+            {{comment_body}}
+          </div>
+        </div>
+      </div>
+      {{/comments}}
+      {{^is_owner}}
+      <form class="ui reply form">
+        <input type="hidden" name="photo_id" value="{{photo.photo_id}}">
+        <div class="field">
+          <textarea name="comment_body"></textarea>
+        </div>
+        <div class="ui blue labeled submit icon button">
+          <i class="icon edit"></i> Post Comment
+        </div>
+      </form>
+      {{/is_owner}}
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="view-album">
+{{#album}}
+<div class="uisegment attached album-screen borderless">
+  <div class="ui main container">
+    <div class="ui equal width grid padded">
+      <div class="row">
+        <div class="column">
+          <div class="ui segment">
+            <div class="ui header">{{album_name}}
+              <div class="sub header">{{album_age}}</div>
+            </div>
+            <div class="description">
+            </div>
+            <div class="ui top right attached label">Album</div>
+          </div>
+          <div id="file-upload-dialog" class="ui segment owner">
+            <div class="ui dimmer">
+              <div class="ui text loader">Uploading</div>
+            </div>
+            <p></p>
+            <h2 class="ui black image header">
+              <img src="images/save.png" class="image">
+              <div class="content">
+                Upload a photo
+              </div>
+            </h2>
+            <form class="ui small form">
+              <input type="hidden" name="album_id" value="{{album_id}}">
+              <div class="ui basic segment borderless">
+                <div class="field">
+                  <div class="ui left input">
+                    <input type="file" name="photo_file" placeholder="Select File">
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui left input">
+                    <input name="photo_caption" placeholder="Type your caption here">
+                  </div>
+                </div>
+                <button class="ui fluid  green button owner" onclick="">
+                  <i class="icon add"></i>
+                  Upload a photo
+                </button> 
+              </div>
+              <div class="ui error message"></div>
+            </form>
+          </div> 
+        </div>
+        <div class="column">
+          <div class="ui segment">
+            <div class="ui link items">
+              <div class="item">
+                <div class="ui tiny image">
+                  <img src="/avatars/{{user_avatar}}">
+                </div>
+                <div class="content">
+                  <div class="header"><a href="#user/{{user_id}}">{{user_name}}</a></div>
+                  <div class="meta">{{user_hometown}}&nbsp;</div>
+                  <button class="ui right floated button notowner registered" onclick="add_friend_request({{user_id}})">
+                    <i class="icon add user"></i>
+                    Add Friend
+                  </button>
+                  <div class="description">
+                   <!-- <i class="icon star"></i>{{user_activity}} Points-->
+                  </div>
+                </div>
+                <div class="ui top right attached label">Author</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/album}}
+</script>
+
+<script id="view-photos" type="x-tmpl-mustache">
+<div class="ui screen middle aligned aligned grid">
+  <div class="column">
+    <div class="ui gallery">
+      {{#photos}}
+
+      <div class="ui overlayed card inverted">
+        <div class="top overlay content">
+          <div class="right floated owner">
+            <a onclick='delete_photo({{photo_id}}); return false;'><i class="ui remove large circle red icon"></i></a>
+          </div>
+          <img class="ui avatar image" src="/avatars/{{user_avatar}}"> {{user_name}}
+        </div>
+        <div class="fluid contained image">
+          <img onclick='route("photo/{{photo_id}}"); return false;' src="/thumbs/{{photo_code}}">
+        </div>
+        <div class="bottom overlay content borderless">
+          <span class="right floated" style="margin-top: 0.5em;">
+            <i class="heart outline like icon"></i> {{photo_like_count}}
+            <i class="comment icon"></i> {{photo_comment_count}}
+          </span>
+
+          <div class="header" style="font-size: 1.1em !important">
+            {{photo_caption}}
+          </div>
+          <div class="meta">
+            {{photo_age}}
+          </div>
+        </div>
+      </div>
+      {{/photos}}
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="view-user-albums" type="x-tmpl-mustache">
+  <div class="ui screen aligned main container">
+    {{#user}}
+    <div class="ui segment">
+      <div class="ui link items">
+        <div class="item">
+          <div class="ui tiny image">
+            <img src="/avatars/{{user_avatar}}">
+          </div>
+          <div class="content">
+            <div class="header"><a href="#user/{{user_id}}">{{user_name}}</a></div>
+            <div class="meta">{{user_hometown}}&nbsp;</div>
+            <button class="ui right floated button notowner registered" onclick="add_friend_request({{user_id}})">
+              <i class="icon add user"></i>
+              Add Friend
+            </button>
+            <div class="description">
+              <i class="icon star"></i>{{user_activity}} Points
+            </div>
+          </div>
+          <div class="ui top right attached label">Author</div>
+        </div>
+      </div>
+    </div>
+    {{/user}}
+  </div>
+
+  <div class="ui screen aligned main container">
+    <div id="album-cards" class="ui four doubling fluid stackable cards">
+      <div id="add-album-card" class="ui card owner">
+        <div class="content">
+   
+          <div class="description" style="margin-top: 40%; margin-bottom: 35%;">
+            <form class="ui large form">
+             <div class="field">
+               <div class="ui left icon input">
+                 <i class="book icon"></i>
+                 <input type="text" name="album_name" placeholder="Album name" autocomplete="off">
+               </div>
+             </div>
+             <div class="ui fluid large submit button green">
+               <i class="plus icon"></i>
+               Create Album
+             </div>
+             <div class="ui error message"></div>
+             </form>
+           </div>
+        </div>
+      </div>
+
+      {{#albums}}
+      <div class="ui album card">
+        <div class="title content">
+          <a onclick="delete_album({{album_id}}); return false;"><i class="right floated remove circle red large icon owner"></i></a>
+          <div class="header"><a href='#album/{{album_id}}'>{{album_name}}</a></div>
+        </div>
+        <a class="main content" href='#album/{{album_id}}'>
+          <div class="montage">
+            <div class="ui tiny images">
+                  {{#photos.0}}
+                     <img class="" src="/thumbs/{{.}}">
+                  {{/photos.0}}
+                  {{^photos.0}}
+                     <img class=""  src="/images/wireframe/image.png">
+                  {{/photos.0}}
+                  {{#photos.1}}
+                     <img class=""  src="/thumbs/{{.}}">
+                  {{/photos.1}}
+                  {{^photos.1}}
+                     <img class=""  src="/images/wireframe/image.png">
+                  {{/photos.1}}
+                  {{#photos.2}}
+                     <img class=""  src="/thumbs/{{.}}">
+                  {{/photos.2}}
+                  {{^photos.2}}
+                     <img class=""  src="/images/wireframe/image.png">
+                  {{/photos.2}}
+                  {{#photos.3}}
+                     <img class=""  src="/thumbs/{{.}}">
+                  {{/photos.3}}
+                  {{^photos.3}}
+                     <img class=""  src="/images/wireframe/image.png">
+                  {{/photos.3}}
+            </div>
+          </div>
+        </a>   
+        <div class="extra content" style="clear: both !important;">
+          <span class="right floated">
+            {{album_age}}
+          </span>
+          <span>
+            <i class="photo icon"></i>
+            {{photo_count}} Photos
+          </span>
+        </div>
+      </div>
+      {{/albums}}
+    </div>
+  </div>
+</script>
+
+<script id="add-album-card" type="x-tmpl-mustache">
+   <div id="add-album-card" class="ui card">
+     <div class="ui middle aligned center aligned content" style="margin-top: calc(50% - 3em);">
+         <form class="ui large form">
+          <div class="ui error message"></div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="book icon"></i>
+              <input type="text" name="album_name" placeholder="Album name">
+            </div>
+          </div>
+          <button class="massive green circular ui icon submit button">
+             <i class="plus icon"></i>
+          </button>
+        </form>
+     </div>
+   </div>
+</script>
+
+<script id="make-album" type="x-tmpl-mustache">
+<div class="ui middle aligned center aligned grid fullscreen">
+  <div class="small column">
+    <h2 class="ui black image header">
+      <img src="book-cover.png" class="image">
+      <div class="content">
+        Create a new album
+      </div>
+    </h2>
+    <form class="ui large form">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="email" placeholder="E-mail address">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Password">
+          </div>
+        </div>
+        <div class="ui fluid large submit button">Log-in</div>
+      </div>
+      <div class="ui error message"></div>
+    </form>
+    <div class="ui message">
+      New to us? <a href="#register">Register now</a>
+    </div>
+  </div>
+</div>
+</script>
+
+</html>

@@ -1,0 +1,46 @@
+#
+#
+#   Dependencies:
+#   - ImageMagick
+#   - libmicrohttpd
+#   - postgresql
+#   - json-c
+#   - pcre
+#                                                                              
+#   The database login details must be edited in the Makefile "install:" target
+#    
+# 
+#   Next compile then initialize the database by using
+#
+#     make install
+#
+#   A compiled binary is included already, however you can recompile it using
+#   
+#     make clean
+#     make 
+#
+#
+#   After compilation the program can be run as follows
+#
+#     ./main.out <dbconfig> <portno>
+#
+#   Example:
+#
+#     ./main.out "user=khalile dbname=photoshare sslmode=disable" 8888
+#
+#
+#   There are 2 sample accounts preloaded, both with blank passwords
+#   - john@smith.com
+#   - fred@smith.com
+#
+#
+#   Sample stock imagery came from the following places:
+#   - https://unsplash.com/photos/Ki0dpxd3LGc
+#   - http://alpha.wallhaven.cc/wallpaper/73148
+#   - http://alpha.wallhaven.cc/wallpaper/96282
+#   - http://alpha.wallhaven.cc/wallpaper/13681
+#   - http://alpha.wallhaven.cc/wallpaper/286132
+#   
+#   Other imagery are from game-icons.net, and semantic-ui.
+#
+#

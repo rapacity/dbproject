@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PhotoShare : Quality Photo Sharing</title>
+  <meta name="description" content="CS Project">
+  <meta name="author" content="Khalil El-Harake">
+  <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/semantic-ui/2.1.6/semantic.min.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+  <script src="https://cdn.bootcss.com/semantic-ui/2.1.6/semantic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.0/mustache.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bacon.js/0.7.82/Bacon.min.js"></script>
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script src="js/application.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/main.js"></script>
+</head>
+
+<body class="ui inverted pushable">
+
+<div id="navbar" class="ui fixed top inverted menu borderless">
+</div>
+
+<div id="sidebar" class="ui fixed left vertical inverted sidebar menu">
+  <a class="item registered" href="#albums">
+    <i class="block layout icon"></i>
+    My Albums
+  </a>
+
+  <a class="item registered" href="#friends">
+    <i class="users icon"></i>
+    My Friends
+  </a>
+
+  <a class="item registered" href="#recommendations">
+    <i class="asterisk icon"></i>
+    You May Like
+  </a>
+
+  <div class="header item photosearch">
+    <h3>Photo search</h3>
+  </div>
+
+  <div class="item photosearch">
+    <div id="sidebar-search" class="ui small fluid action input">
+      <input name="by_caption" placeholder="Type caption ..." type="text" size="30">
+      <button class='ui blue labeled right small icon button'>
+        <i class="search icon"></i>
+        Search
+      </button>
+    </div>
+  </div>
+
+  <div class="item photosearch registered">
+    <form>
+    <div class="ui toggle checkbox finder">
+      <input name="personal_only" type="checkbox">
+      <label style="color: white !important;">Limit to personal photos</label>
+    </div>
+    </form>
+  </div>
+
+  <div class="item photosearch">
+    <div id="tags_list_filter" class="ui green labels">
+    </div>
+
+    <div class="ui small fluid action input">
+      <input name="tag_name_filter" placeholder="Type tag..." type="text">
+      <button class='ui green labeled right small icon button' onclick='add_filter_tag(); return false;'>
+        <i class="plus small icon"></i>
+        Filter
+      </button>
+    </div>
+  </div>
+
+  <div class="item photosearch">
+    <div id="tags_list_exclude" class="ui red labels">
+    </div>
+    <div class="ui small fluid action input">
+      <input name="tag_name_exclude" placeholder="Type tag..." type="text">
+      <button class='ui red labeled right small icon button' onclick='add_exclude_tag(); return false;'>
+        <i class="minus small icon"></i>
+        Exclude
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="pusher">
+  <div id="main">
+  </div>
+
+  <div id="separator" class="ui fitted divider"></div>
+
+  <div id="footer" class="ui vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable divided equal height stackable centered grid">
+        <div class="four wide column">
+        </div>
+        <div class="four wide column">
+        </div>
+        <div class="four wide column">
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

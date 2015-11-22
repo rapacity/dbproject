@@ -1,0 +1,364 @@
+
+html, body, #footer, .pusher, body.pushable {
+  background-color: #CACDCE !important;
+}
+
+html, body {
+  margin: 0px !important;
+  padding: 0px !important;
+  border: none !important;
+}
+
+body {
+ overflow-y: auto !important;
+}
+
+#main, .pusher {
+  min-height: 800px !important;
+  height: auto !important;
+}
+
+#main {
+  height: auto;
+  background-color: #CACDCE !important;
+  padding-bottom: 60px;
+}
+
+/* space for the head navbar */
+#main, #sidebar {
+  padding-top:40px !important;
+}
+
+#footer {
+  margin: 0px !important;
+  padding: 0px !important;
+  padding-top: 40px !important;
+  padding-bottom: 100px !important;
+
+}
+
+
+/* makes content area shrink when the sidebar is opened */
+body.open-sidebar .pusher {
+  /*padding-right: 260px !important;*/
+  width: calc(100% - 260px) !important;
+}
+
+
+
+.album-screen, .photo-screen {
+  background-color: #313233 !important;
+}
+
+.photo-screen {
+  max-height: 820px !important;
+}
+
+.photo-screen .column {
+  max-height: 820px !important;
+}
+
+.photo-screen img {
+  max-height: 800px !important;
+  padding: 20px !important; 
+  max-width:100%;
+}
+
+
+.borderless {
+  border: none !important;
+  border-radius: none !important;
+}
+
+
+.small.column {
+  max-width: 450px;
+}
+
+.medium.column {
+  max-width: 600px;
+}
+
+.large.column {
+  max-width: 960px;
+}
+
+.search.results {
+  padding: 100px !important;
+}
+
+
+
+body.unregistered-hide *.registered { display: none !important; }
+body *.registered { display: block !important; }
+
+
+
+body.notowner-hide *.owner { display: none !important; }
+body *.owner { display: block !important; }
+
+body:not(.notowner-hide) *.notowner { display: none !important; }
+
+
+
+
+.ui.images.smaller .column {
+  width: 110px !important;
+  height: 133px !important;
+}
+
+
+.ui.button.transparent {
+  background-color: none !important;
+}
+
+
+
+.ui.comments {
+  min-width: 566px;
+}
+
+
+.ui.screen {
+  min-width: 566px !important;
+  padding-top: 20px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  padding-bottom: 20px !important;
+}
+
+
+
+
+
+/******************************************************************************
+*                          Full screen mode                                   *
+******************************************************************************/
+
+
+body.fullscreen #main {
+  height: 100% !important;
+  padding-bottom: 0px !important;
+}
+
+body.fullscreen {
+  height: 100% !important;
+}
+
+body.fullscreen .pusher {
+  overflow-y: auto !important;
+  height: 100% !important;
+}
+
+
+.fullscreen {
+  min-height: 100%;
+  height: 100% !important;
+}
+
+body.fullscreen #footer {
+  display: none !important;
+}
+
+
+body:not(.fullscreen) #main {
+  margin-bottom: 200px;
+}
+
+
+body.fullscreen #separator {
+  display: none;
+}
+
+
+
+
+/******************************************************************************
+*                               Front page                                    *
+******************************************************************************/
+
+.full.height.image {
+  background-image: url("/images/colorado.jpe");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  width: 100%;
+}
+
+
+.masthead.segment {
+    min-height: 800px; 
+    padding: 1em 0em;
+}
+
+.masthead h1.ui.header {
+    margin-top: 2em;
+    margin-bottom: 0em;
+    font-size: 5em;
+    font-weight: bold;
+}
+
+
+/******************************************************************************
+*                          Left search bar                                    *
+******************************************************************************/
+
+
+.finder input + label {
+  color: rgb(80,130,220) !important;
+}
+
+.ui.toggle.checkbox input:checked ~ label {
+  color: rgb(80,130,220) !important;
+}
+
+
+.ui.vertical.menu .photosearch.item:before {
+  height: 0px !important;
+}
+
+
+.ui.vertical.menu .photosearch.header {
+  margin-top: 50px !important;
+}
+
+
+
+
+/******************************************************************************
+*                          Photo list views                                   *
+******************************************************************************/
+
+.title.content {
+   -webkit-box-flex: 0 !important;
+   flex-grow: 0 !important;
+}
+
+.main.content {
+  background: #D0DFEF !important;
+  display: block;
+  height: 100%;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+}
+
+.ui.absolute.bottom {
+  position: absolute !important;
+  bottom: 0px !important;
+  left: 0px;
+  right: 0px;
+}
+
+.ui.overlayed.card {
+  height: auto !important;
+  width: auto !important;
+  min-width: 250px !important;
+  min-width: 250px !important;
+}
+
+.fluid.contained.image {
+  min-width: 250px !important;
+  display: block;
+  width: auto !important;
+  height: auto !important;
+  background: grey;
+}
+
+.fluid.contained.image img {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: auto !important; 
+  height: auto !important; 
+  background: white;
+}
+
+.ui.overlayed.card {
+  display: inline-block !important;
+  margin: 5px !important;
+  border: 5px solid grey;
+  border-radius: 0.5rem;
+}
+
+.ui.gallery > * {
+  vertical-align: middle !important;
+}
+
+.ui.overlayed.card .bottom.overlay .header {
+  font-size: 1.1em !important;
+}
+
+.ui.overlayed.card .overlay {
+  background: rgba(255,255,255,0.7);
+}
+
+.ui.overlayed.card.inverted .overlay {
+  background: rgba(0,0,0,0.7);
+}
+
+.ui.overlayed.card.inverted * {
+  color: white;
+}
+
+.ui.overlayed.card.inverted .header {
+  color: white;
+}
+
+.ui.overlayed.card .overlay {
+  opacity: 0.0 !important;
+  -webkit-transition: 0.3s 0.1s;
+  transition: 0.3s 0.1s;
+}
+
+.ui.overlayed.card:hover .overlay {
+  opacity: 1.0 !important;
+  -webkit-transition: 0.3s 0.1s;
+  transition: 0.3s 0.1s;
+}
+
+.ui.overlayed.card .top.overlay {
+  position: absolute !important;
+  top: 0px !important;
+  left: 0px !important;
+  right: 0px !important;
+  z-index: 100;
+}
+
+.ui.overlayed.card .bottom.overlay {
+  position: absolute !important;
+  bottom: 0px !important;
+  left: 0px !important;
+  right: 0px !important;
+  z-index: 100;
+}
+
+
+
+/******************************************************************************
+*                          Album list views                                   *
+******************************************************************************/
+
+.ui.album.card .content {
+  background: #FFFFFF;
+}
+
+.ui.album.card .montage {
+  padding-top: 15px;
+  display: inline-block !important;
+  height: 100% !important;
+  vertical-align: middle !important;
+  text-align: center;
+}
+
+.ui.album.card img {
+  border: 2px solid darkgrey;
+  vertical-align: middle !important;
+  display: inline-block !important;
+  background: white;
+}
+
+.montage .ui.images {
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+
